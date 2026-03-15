@@ -32,17 +32,17 @@ set JAVA_HOME=C:\Components\jbr_jcef-21.0.10-windows-x64-b1163.110
 
 Or add to system env vars permanently.
 
-## Step 3 — Build Tungsten
+## Step 3 — Build & publish Tungsten
 
-altoclef depends on Tungsten JAR. Build it first:
+altoclef bundles Tungsten via local Maven. Publish it first:
 
 ```bash
 cd Tungsten
-gradlew.bat build
+gradlew.bat publishToMavenLocal
 cd ..
 ```
 
-Output: `Tungsten/build/libs/tungsten-fabric-ALPHA-1.6.0-1.21compat.jar`
+**After every Tungsten code change**, re-run `gradlew.bat publishToMavenLocal` from Tungsten/ so altoclef picks up the new version.
 
 Baritone JAR is pre-built in `baritone_altoclef/maven/` — no action needed.
 
