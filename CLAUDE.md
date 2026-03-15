@@ -12,6 +12,12 @@ See PROJECT_OVERVIEW.md for full task list and all main constraints.
 
 See `RULES.md` for full details. Key rule: **push submodule first, then update root repo pointer.**
 
+## STRICT Rules
+
+- **NEVER run Gradle** (`gradlew build`, `runClient`, `publishToMavenLocal`, etc.) without the user explicitly asking. Running build recompiles JARs and breaks active hot swap / debug sessions, costing ~10 min to restart.
+- After editing code, just describe changes. Do NOT "verify" by building.
+- Auto-commit and push your changes (if not explained otherwise)
+
 ## Important Files
 
 - `PROJECT_OVERVIEW.md` — tasks, plans, links

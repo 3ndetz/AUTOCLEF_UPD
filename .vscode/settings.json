@@ -1,8 +1,8 @@
 {
     "java.autobuild.enabled": false,
-    "java.server.launchMode": "LightWeight",
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
+    "java.server.launchMode": "Standard",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx8G -Xms100m -Xlog:disable",
     "java.import.exclusions": [
         "**/forge/**",
         "**/neoforge/**",
@@ -16,5 +16,12 @@
     ],
     "files.exclude": {
         "**/baritone_altoclef": true
-    }
+    },
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Components\\jbr_jcef-21.0.10-windows-x64-b1163.110",
+            "default": true
+        }
+    ]
 }

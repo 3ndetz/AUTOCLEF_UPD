@@ -42,7 +42,18 @@ gradlew.bat publishToMavenLocal
 cd ..
 ```
 
-**After every Tungsten code change**, re-run `gradlew.bat publishToMavenLocal` from Tungsten/ so altoclef picks up the new version.
+**After every Tungsten code change:**
+
+```bash
+cd Tungsten
+gradlew.bat publishToMavenLocal
+cd ..\altoclef
+gradlew.bat :1.21:runClient
+```
+
+Tungsten uses a `-SNAPSHOT` version so Gradle always picks up the fresh JAR — no cache clearing needed.
+
+**WARNING:** Do NOT use `gradlew --refresh-dependencies` — it nukes yarn mappings and breaks the build.
 
 Baritone JAR is pre-built in `baritone_altoclef/maven/` — no action needed.
 
@@ -59,7 +70,7 @@ First run downloads ~1 GB (MC + Fabric + deps). Cached after that.
 
 ```bash
 cd altoclef
-gradlew.bat :1.21:runClient --debug-jvm
+gradlew.bat :1.21:runClient --debug-jvm --info
 ```
 
 MC starts and waits for debugger on port **5005**.
@@ -72,6 +83,20 @@ With JBR, hot-swap works for method bodies, new methods, and new fields.
 Open `AUTOCLEF_UPD.code-workspace` for Gradle panels of both altoclef and Tungsten.
 
 **Note:** `baritone_altoclef` is excluded from Java Language Server indexing — its forge/neoforge subprojects hang the LS. This is intentional.
+
+## Troubleshooting: stale Loom cache
+
+If VSCode shows "references non existing library" errors after rebuilding:
+
+```bash
+# 1. Close VSCode first! LS holds file locks.
+# 2. Kill ALL Java/OpenJDK processes (LS, Gradle daemons, etc.)
+taskkill /f /im java.exe
+# Also check Task Manager for any remaining "OpenJDK Platform binary" processes and kill them manually
+# 3. Delete Loom cache
+rd /s /q altoclef\.gradle\loom-cache
+# 4. Re-open VSCode, rebuild: gradlew.bat :1.21:build
+```
 
 ## Rebuilding Baritone (only if you edit baritone source)
 
