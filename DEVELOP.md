@@ -1,39 +1,59 @@
-# DEVELOP.md — Dev environment setup
+# DEVELOP.md — Quick start from scratch
 
-## JDK: JetBrains Runtime (JBR) with DCEVM
+## Step 0 — Install JDK 21 (JBR recommended)
 
-We use **JBR 21** instead of regular OpenJDK — it supports enhanced hot-swap (add methods/fields without restart).
+JetBrains Runtime has DCEVM for enhanced hot-swap (add methods without restart).
 
 1. Download `jbr_jcef-21.*-windows-x64` from https://github.com/JetBrains/JetBrainsRuntime/releases
-2. Unzip to e.g. `C:\Components\jbr_jcef-21.0.10-windows-x64-b1163.110`
-3. Set before running Gradle:
-   ```bash
-   set JAVA_HOME=C:\Components\jbr_jcef-21.0.10-windows-x64-b1163.110
-   ```
+2. Unzip, e.g. `C:\Components\jbr_jcef-21.0.10-windows-x64-b1163.110`
+3. Verify: `C:\Components\jbr_jcef-21.0.10-...\bin\java -version` → should say JBR-21
 
-## Clone (first time)
+Regular OpenJDK 21 also works (just no enhanced hot-swap).
+
+## Step 1 — Clone
 
 ```bash
 git clone --recurse-submodules https://github.com/3ndetz/AUTOCLEF_UPD
+cd AUTOCLEF_UPD
 ```
 
-Submodules: `altoclef`, `Tungsten`, `baritone_altoclef`.
+This pulls 3 submodules: `altoclef`, `Tungsten`, `baritone_altoclef`.
 
-## Build & run altoclef (1.21)
+If you forgot `--recurse-submodules`:
+```bash
+git submodule update --init --recursive
+```
+
+## Step 2 — Set JAVA_HOME
+
+```bash
+set JAVA_HOME=C:\Components\jbr_jcef-21.0.10-windows-x64-b1163.110
+```
+
+Or add to system env vars permanently.
+
+## Step 3 — Build Tungsten
+
+altoclef depends on Tungsten JAR. Build it first:
+
+```bash
+cd Tungsten
+gradlew.bat build
+cd ..
+```
+
+Output: `Tungsten/build/libs/tungsten-fabric-ALPHA-1.6.0-1.21compat.jar`
+
+Baritone JAR is pre-built in `baritone_altoclef/maven/` — no action needed.
+
+## Step 4 — Run
 
 ```bash
 cd altoclef
 gradlew.bat :1.21:runClient
 ```
 
-First build needs Tungsten JAR. Build it first if missing:
-
-```bash
-cd Tungsten
-gradlew.bat build
-```
-
-JAR: `Tungsten/build/libs/tungsten-fabric-ALPHA-1.6.0-1.21compat.jar`
+First run downloads ~1 GB (MC + Fabric + deps). Cached after that.
 
 ## Debug with hot-swap
 
@@ -42,14 +62,17 @@ cd altoclef
 gradlew.bat :1.21:runClient --debug-jvm
 ```
 
-MC waits for debugger on port **5005**. Attach via VSCode (F5 → "Attach to Minecraft").
+MC starts and waits for debugger on port **5005**.
+In VSCode: F5 → "Attach to Minecraft" (config in `.vscode/launch.json`).
 
-## VSCode workspace
+With JBR, hot-swap works for method bodies, new methods, and new fields.
 
-Open `AUTOCLEF_UPD.code-workspace` — shows Gradle panels for both altoclef and Tungsten.
+## VSCode
 
-`baritone_altoclef` is excluded from Java indexing (its forge/neoforge subprojects hang the Language Server).
+Open `AUTOCLEF_UPD.code-workspace` for Gradle panels of both altoclef and Tungsten.
 
-## Baritone
+**Note:** `baritone_altoclef` is excluded from Java Language Server indexing — its forge/neoforge subprojects hang the LS. This is intentional.
 
-Pre-built JAR in `baritone_altoclef/maven/`. Only rebuild if you change baritone source — see `Tungsten/DEVELOP.md` for details.
+## Rebuilding Baritone (only if you edit baritone source)
+
+See `Tungsten/DEVELOP.md` Step 1.5 for full instructions.
