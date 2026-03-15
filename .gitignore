@@ -1,0 +1,19 @@
+# ── Old/legacy stuff ──
+autoclef/
+
+# ── IDE / build ──
+.idea/
+*.iml
+build/
+.gradle/
+out/
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Misc ──
+old/
+*.log
+old_old_tungsten_progress.md

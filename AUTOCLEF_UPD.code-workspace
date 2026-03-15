@@ -1,0 +1,36 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "name": "AUTOCLEF_UPD (root)"
+        },
+        {
+            "path": "altoclef",
+            "name": "altoclef (Gradle)"
+        },
+        {
+            "path": "Tungsten",
+            "name": "Tungsten (Gradle)"
+        }
+    ],
+    "settings": {
+        "java.autobuild.enabled": false,
+        "java.server.launchMode": "LightWeight",
+        "java.configuration.updateBuildConfiguration": "interactive",
+        "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
+        "java.import.exclusions": [
+            "**/forge/**",
+            "**/neoforge/**",
+            "**/tweaker/**",
+            "**/1.21.1/**",
+            "**/node_modules/**",
+            "**/.metadata/**",
+            "**/baritone_altoclef/**",
+            "**/autoclef/**",
+            "**/archivedupdates/**"
+        ],
+        "files.exclude": {
+            "**/baritone_altoclef": true
+        }
+    }
+}

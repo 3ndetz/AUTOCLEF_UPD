@@ -1,0 +1,11 @@
+[submodule "altoclef"]
+	path = altoclef
+	url = https://github.com/3ndetz/altoclef
+	branch = main
+[submodule "Tungsten"]
+	path = Tungsten
+	url = https://github.com/3ndetz/Tungsten
+	branch = altoclef-compat
+[submodule "baritone_altoclef"]
+	path = baritone_altoclef
+	url = https://github.com/3ndetz/baritone_altoclef
