@@ -31,6 +31,81 @@
         ],
         "files.exclude": {
             "**/baritone_altoclef": true
-        }
+        },
+        "gradle.nestedProjects": true,
+        "gradle.autoDetect": "on"
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "altoclef: runClient 1.21",
+                "type": "shell",
+                "command": "gradlew :1.21:runClient",
+                "options": { "cwd": "${workspaceFolder:altoclef (Gradle)}" },
+                "group": "build",
+                "problemMatcher": []
+            },
+            {
+                "label": "altoclef: runClient 1.21 (debug)",
+                "type": "shell",
+                "command": "gradlew :1.21:runClient --debug-jvm",
+                "options": { "cwd": "${workspaceFolder:altoclef (Gradle)}" },
+                "group": "build",
+                "problemMatcher": [],
+                "isBackground": true
+            },
+            {
+                "label": "altoclef: build 1.21",
+                "type": "shell",
+                "command": "gradlew :1.21:build",
+                "options": { "cwd": "${workspaceFolder:altoclef (Gradle)}" },
+                "group": "build",
+                "problemMatcher": []
+            },
+            {
+                "label": "Tungsten: build",
+                "type": "shell",
+                "command": "gradlew build",
+                "options": { "cwd": "${workspaceFolder:Tungsten (Gradle)}" },
+                "group": "build",
+                "problemMatcher": []
+            },
+            {
+                "label": "Tungsten: publishToMavenLocal",
+                "type": "shell",
+                "command": "gradlew publishToMavenLocal",
+                "options": { "cwd": "${workspaceFolder:Tungsten (Gradle)}" },
+                "group": "build",
+                "problemMatcher": []
+            },
+            {
+                "label": "Tungsten: runClient",
+                "type": "shell",
+                "command": "gradlew runClient",
+                "options": { "cwd": "${workspaceFolder:Tungsten (Gradle)}" },
+                "group": "build",
+                "problemMatcher": []
+            }
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "java",
+                "name": "Attach to Minecraft (debug)",
+                "request": "attach",
+                "hostName": "localhost",
+                "port": 5005
+            }
+        ],
+        "compounds": [
+            {
+                "name": "altoclef: Debug Client",
+                "configurations": ["Attach to Minecraft (debug)"],
+                "preLaunchTask": "altoclef: runClient 1.21 (debug)"
+            }
+        ]
     }
 }
