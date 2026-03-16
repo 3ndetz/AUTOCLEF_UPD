@@ -11,6 +11,10 @@
         {
             "path": "Tungsten",
             "name": "Tungsten (Gradle)"
+        },
+        {
+            "path": "baritone_altoclef",
+            "name": "baritone_altoclef"
         }
     ],
     "settings": {
@@ -29,9 +33,6 @@
             "**/autoclef/**",
             "**/archivedupdates/**"
         ],
-        "files.exclude": {
-            "**/baritone_altoclef": true
-        },
         "gradle.nestedProjects": true,
         "gradle.autoDetect": "on"
     },
